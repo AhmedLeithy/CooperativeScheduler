@@ -14,8 +14,6 @@ void printTask1(void);
 void printTask2(void);
 void printTask3(void);
 void printTask4(void);
-void ReRunMe(int, int);
-static PriorityQueue readyQueue, delayedQueue;
 
 void SysTick_Handler(void);
 void USART2_IRQHandler(void);
@@ -126,27 +124,18 @@ void printHello(){
 void printTask1(){
 	uint8_t task1[] = "I am Task 1!!\n";
 	sendUART(task1, sizeof(task1));
-	
-	addDelayedTask(&delayedQueue, printTask1, 10,5);
 }
 void printTask2(){
 	uint8_t task2[] = "I am Task 2!!\n";
 	sendUART(task2, sizeof(task2));
-	
-	addDelayedTask(&delayedQueue, printTask2, 10,6);
 }
 void printTask3(){
 	uint8_t task3[] = "I am Task 3!!\n";
 	sendUART(task3, sizeof(task3));
-	
-	addDelayedTask(&delayedQueue, printTask3, 10,8);
-
 }
 void printTask4(){
 	uint8_t task4[] = "I am Task 4!!\n";
 	sendUART(task4, sizeof(task4));
-	
-	addDelayedTask(&delayedQueue, printTask4, 10,3);
 }
 
 int main()
@@ -170,12 +159,10 @@ int main()
 	  /* enable interrupt controller for External interrupt 0 */
 		NVIC_EnableIRQ(EXTI0_IRQn);
 	
-		readyQueue =  newPriorityQueue();
-		delayedQueue =  newPriorityQueue();
-
+		PriorityQueue readyQueue =  newPriorityQueue();
 		addTask(&readyQueue, printTask1,5);
 		addTask(&readyQueue, printTask2,6);
-		addTask(&readyQueue, printTask3,8);
+		addTask(&readyQueue, printTask3,0);
 		addTask(&readyQueue, printTask4,3);
 		
 	  while(1)
@@ -190,8 +177,6 @@ int main()
 						dequeueTask(&readyQueue)();
 						timerFlag = 0;
 					}
-					
-					tick(&delayedQueue,&readyQueue,1);
 				}
 		}
 }
