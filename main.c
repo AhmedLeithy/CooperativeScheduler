@@ -1,31 +1,62 @@
 #include "stm32f4xx.h"
 #include "system_stm32f4xx.h"
-#include "PriorityQueue.h"
+#include "stdio.h"
 
 static uint8_t msg[] = "Renode Alive !!\n";
+static uint8_t wait_msg[] = "Ready queue is empty !!\n";
 static uint8_t pressedMsg[] = "Button is pressed !!\n";
 static uint8_t releasedMsg[] = "Button is released !!\n";
 static char buttonPressed = 1;
 static char timerFlag = 0;
 static volatile uint8_t stopFlag = 0;
+static uint32_t ticks = 0;
+static uint32_t tempcounter = 0;
+static char here[30];
 
-void printHello(void);
-void printTask1(void);
-void printTask2(void);
-void printTask3(void);
-void printTask4(void);
-void ReRunMe(int, int);
-static PriorityQueue readyQueue, delayedQueue;
 
 void SysTick_Handler(void);
 void USART2_IRQHandler(void);
+void TIM2_IRQHandler(void);
 void EXTI0_IRQHandler(void);
+void Dispatch(void);
 static void sendUART(uint8_t * data, uint32_t length);
 static uint8_t receiveUART(void);
 
 void SysTick_Handler(void)  {
 	timerFlag = 1;
+	//tempcounter++;
+	//sprintf(here, "%d\n",tempcounter);
+	//sendUART((uint8_t*)here,sizeof(here));
+//	if (tempcounter%10==0)
+//	{
+//		sprintf(here, "%d\n",tempcounter);
+//		sendUART((uint8_t*)here,sizeof(here));
+//	}
+		//sendUART(wait_msg,sizeof(wait_msg));
+		
+	/* Incrementing ticks every 100ms */
+	if (ticks == INT32_MAX)
+		ticks = 0;
+	else
+		ticks++;
+	sprintf(here,"Ticks: %d\n",ticks);
+	sendUART((uint8_t*)here,sizeof(here));
+	
 }
+
+//void Dispatch(void)
+//{
+//	if (isEmpty(&readyQueue))
+//	{
+//		sendUART(wait_msg,sizeof(wait_msg));
+//		timerFlag = 0;
+//	}
+//	else
+//	{
+//		dequeueTask(&readyQueue)();
+//		timerFlag = 0;
+//	}
+//}
 
 void USART2_IRQHandler(void) {
 	/* pause/resume UART messages */
@@ -33,6 +64,12 @@ void USART2_IRQHandler(void) {
 	
 	/* dummy read */
 	(void)receiveUART();
+}
+
+void TIM2_IRQHandler(void)
+{
+	sendUART(wait_msg,sizeof(wait_msg));
+	
 }
 
 void EXTI0_IRQHandler(void) {
@@ -119,41 +156,91 @@ static void uartInit()
     USART2->CR1 |= (1 << 13);
 }
 
-void printHello(){
-	sendUART(msg, sizeof(msg));
+static void tim2Init()
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+	TIM2->PSC = 1600000;
+	TIM2->SMCR = RESET;
+	TIM2->SMCR &= ~TIM_SMCR_SMS;
+	TIM2->CR1 &= ~(TIM_CR1_DIR | TIM_CR1_CMS);
+	//TIM2->CR1 |= TIM_COUNTERMODE_UP;
+	TIM2->CR1 &= ~TIM_CR1_CKD;
+	//TIM2->CR1 |= TIM_CLOCKDIVISION_DIV1;
+	TIM2->EGR = TIM_EGR_UG;
+	TIM2->CCMR1 &= ~TIM_CCMR1_CC2S;	
+	TIM2->SR = 0; /* Clear the update event flag */
+	
+	TIM2->ARR = 65535;
+	TIM2->CR1 |= TIM_CR1_CEN;
 }
 
-void printTask1(){
-	uint8_t task1[] = "I am Task 1!!\n";
-	sendUART(task1, sizeof(task1));
-	
-	addDelayedTask(&delayedQueue, printTask1, 10,5);
-}
-void printTask2(){
-	uint8_t task2[] = "I am Task 2!!\n";
-	sendUART(task2, sizeof(task2));
-	
-	addDelayedTask(&delayedQueue, printTask2, 10,6);
-}
-void printTask3(){
-	uint8_t task3[] = "I am Task 3!!\n";
-	sendUART(task3, sizeof(task3));
-	
-	addDelayedTask(&delayedQueue, printTask3, 10,8);
+///* TIM2 Configuration */
+///* TIM2 clock enable */
+//RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+///* Set the Timer prescaler to get 8MHz as counter clock */
+//Prescaler = (uint16_t) (SystemCoreClock / 8000000) - 1; 
+//TIM2->SMCR = RESET;
+///* Reset the SMCR register */
+//#ifdef USE_ETR
+///* Configure the ETR prescaler = 4 */
+//TIM2->SMCR |= TIM_ETRPRESCALER_DIV4 |
+///* Configure the polarity = Rising Edge */
+//TIM_ETRPOLARITY_NONINVERTED |
+///* Configure the ETR Clock source */
+//TIM_SMCR_ECE;
+//#else /* Internal clock source */
+///* Configure the Internal Clock source */
+//TIM2->SMCR &= ~TIM_SMCR_SMS;
+//#endif /* USE_ETR */
+//TIM2->CR1 &= ~(TIM_CR1_DIR | TIM_CR1_CMS);
+///* Select the up counter mode */
+//TIM2Clk 3 fETRP = ×
+//f
+//ETR
+//1
+//3 = -- × 8Mhz = 2.66MHz
+//f
+//ETRP = 2MHz 1
+//3
+//=-- × 8MHz
+//Timer clocking using external clock-source AN4776
+//30/72 AN4776 Rev 3
+//TIM2->CR1 |= TIM_COUNTERMODE_UP;
+//TIM2->CR1 &= ~TIM_CR1_CKD;
+///* Set the clock division to 1 */
+//TIM2->CR1 |= TIM_CLOCKDIVISION_DIV1;
+///* Set the Autoreload value */
+//TIM2->ARR = PERIOD;
+///* Set the Prescaler value */
+//TIM2->PSC = (SystemCoreClock / 8000000)-1;
+///* Generate an update event to reload the Prescaler value immediately */
+//TIM2->EGR = TIM_EGR_UG;
+//TIM2->CCMR1 &= ~TIM_CCMR1_CC2S;
+///* Connect the Timer input to IC2 */
+//TIM2->CCMR1 |= TIM_CCMR1_CC2S_0;
 
-}
-void printTask4(){
-	uint8_t task4[] = "I am Task 4!!\n";
-	sendUART(task4, sizeof(task4));
-	
-	addDelayedTask(&delayedQueue, printTask4, 10,3);
-}
+
+//TIM6->SR = 0
+/// Set the required delay /
+/// The timer presclaer reset value is 0. If a longer delay is required the
+//presacler register may be configured to /
+///TIM6->PSC = 0 /
+//TIM6->ARR = ANY_DELAY_RQUIRED
+/// Start the timer counter /
+//TIM6->CR1 |= TIM_CR1_CEN
+/// Loop until the update event flag is set /
+//while (!(TIM6->SR & TIM_SR_UIF));
+/// The required time delay has been elapsed /
+/// User code can be executed */
+
 
 int main()
 {	
 	  /* startup code initialization */
 	  SystemInit();
+		uint32_t tmp = AHBPrescTable[((RCC->CFGR & RCC_CFGR_HPRE) >> 4)];
 	  SystemCoreClockUpdate();
+		tim2Init();
 	  /* intialize UART */
 	  gpioInit();
 		/* intialize UART */
@@ -169,32 +256,29 @@ int main()
 		EXTI->FTSR |= 0x0001;
 	  /* enable interrupt controller for External interrupt 0 */
 		NVIC_EnableIRQ(EXTI0_IRQn);
-	
-		readyQueue =  newPriorityQueue();
-		delayedQueue =  newPriorityQueue();
+		SysTick->LOAD = (6100 * 1000) -1; /* reload with number of clocks per second, 100ms */
+		//SysTick->LOAD = (16000 * 100) - 1;
+		//SysTick->LOAD = SystemCoreClock -1;
+    SysTick->CTRL = 7; /* enable SysTick interrupt, use system clock */
 
-		addTask(&readyQueue, printTask1,5);
-		addTask(&readyQueue, printTask2,6);
-		addTask(&readyQueue, printTask3,8);
-		addTask(&readyQueue, printTask4,3);
-		
+		uint32_t tick_copy;
+		//sprintf(here, "%d\n",tmp);
+		//sendUART((uint8_t*)here,sizeof(here));
+	
 	  while(1)
 		{
-				if(timerFlag && !stopFlag)
-				{
-					if(isEmpty(&readyQueue)){
-						sendUART(msg,sizeof(msg));
-					  timerFlag = 0;
-					}
-					else{
-						dequeueTask(&readyQueue)();
-						timerFlag = 0;
-					}
-					
-					tick(&delayedQueue,&readyQueue,1);
-				}
+				//sendUART(wait_msg,sizeof(wait_msg));
+				//while (!(TIM2->SR & TIM_SR_UIF));
+				
+//				if(timerFlag && !stopFlag)
+//				{
+//						//Dispatch();
+//						tick_copy = ticks;
+//						//ticks = 0;
+//						//tick(tick_copy);
+//					sprintf(here,"Ticks: %d\n",ticks);
+//					sendUART((uint8_t*)here,sizeof(here));
+//					timerFlag = 0;
+//				}
 		}
 }
-
-//Dequing task from the beginning
-

@@ -208,7 +208,7 @@ void SystemCoreClockUpdate(void)
   
   /* Get SYSCLK source -------------------------------------------------------*/
   tmp = RCC->CFGR & RCC_CFGR_SWS;
-
+	
   switch (tmp)
   {
     case 0x00:  /* HSI used as system clock source */
