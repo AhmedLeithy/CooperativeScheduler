@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\CooperativeScheduler.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CooperativeScheduler.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Thu Nov 12 20:53:09 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Fri Nov 13 00:18:04 2020
 <BR><P>
-<H3>Maximum Stack Usage =        104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-task1 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 <P>
 <H3>
 Functions with no stack information
@@ -880,20 +880,22 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;addTask
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
-<P><STRONG><a name="[97]"></a>rerunMe</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, main.o(.text.rerunMe))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+<P><STRONG><a name="[97]"></a>rerunMe</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main.o(.text.rerunMe))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 </UL>
 
 <P><STRONG><a name="[5d]"></a>task1</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = task1 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
@@ -909,7 +911,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text.Init)
 </UL>
 <P><STRONG><a name="[5f]"></a>task3</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task3))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = task3 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task3 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART

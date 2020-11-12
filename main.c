@@ -97,8 +97,12 @@ void Dispatch(void)
 
 void rerunMe(void(*task)(void), int delay, int prio)
 {
-	rerunItem = newQueueItemDelayed(task,delay,prio);	
-	rerunFlag = 1;
+	if(prio >0){
+		rerunItem = newQueueItemDelayed(task,delay,prio);	
+		rerunFlag = 1;
+	} else {
+		queueTask(task, prio);
+	}
 }
 
 
