@@ -281,9 +281,7 @@ void Init(void)
 		delayedQueue = newPriorityQueue();
 		
 		// Add initial tasks to queue
-		queueTask(task1, t1_prio);
-		queueTask(task2, t2_prio);
-		queueTask(task3, t3_prio);
+
 }
 
 
@@ -293,8 +291,12 @@ void Init(void)
 int main()
 {	
 	  Init();
-	
-	  while(1)
+		
+		queueTask(task1, t1_prio);
+		queueTask(task2, t2_prio);
+		queueTask(task3, t3_prio);
+	  
+		while(1)
 		{
 				
 				if(timerFlag)
