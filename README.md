@@ -37,9 +37,9 @@ The priority queue dedicated for delayed tasks works similarly for the ready que
 For the first test, where each task is readded to the ready queue after 10 ticks, we see that each task does indeed run after 10 iterations of the test while loop. For the second test, where each task is readded into the queue after 2 ticks, we notice that the two tasks with the highest priorities are dominating the cpu, since they will always be executed first after being re-added to the ready queue.
 
 ![](images/unittest2-1.png)
-![](images/unittest2-2.png)
 ![](images/unittest2-3.png)
-![](images/unittest2-4.png)
+![](images/unitest2-4.png)</br>
+![](images/unittest2-2.png)
 ![](images/unittest2-5.png)
 
 ***
