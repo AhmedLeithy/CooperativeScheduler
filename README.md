@@ -36,9 +36,12 @@ inserted into the queue as shown below, in random order of priority. The while l
 The priority queue dedicated for delayed tasks works similarly for the ready queue, except for the fact that it takes two numerical values when adding to the queue: the delay in ticks, and the priority of the task for when it gets re-added into the Ready queue. These two numbers are the last two parameters in the addDelayedTask() function respectively. Two of the tests taken are shown below, where the delay of all the tasks is varied between 10 and 2.
 For the first test, where each task is readded to the ready queue after 10 ticks, we see that each task does indeed run after 10 iterations of the test while loop. For the second test, where each task is readded into the queue after 2 ticks, we notice that the two tasks with the highest priorities are dominating the cpu, since they will always be executed first after being re-added to the ready queue.
 
+### Test 1:
 ![](images/unittest2-1.png)
 ![](images/unittest2-3.png)
 ![](images/unitest2-4.png)</br>
+
+### Test 2:
 ![](images/unittest2-2.png)
 ![](images/unittest2-5.png)
 
