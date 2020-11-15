@@ -79,7 +79,7 @@ If we trace this for the first couple of cycles, we will get the following:
 
 This output is the same as the program output, which can be seen below. It should be noted that each task execution message is followed by an integer value inidcating 
 the number of ticks that have passed since the task's execution started.<br/>
-![](images/Demo2_numbers.png)
+![](images/Demo2_number.png)
 
 ***
 
