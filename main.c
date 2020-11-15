@@ -4,11 +4,9 @@
 #include "PriorityQueue.h"
 
 static uint8_t wait_msg[] = "Ready queue is empty !!\n";
-static uint8_t pressedMsg[] = "Button is pressed !!\n";
-static uint8_t releasedMsg[] = "Button is released !!\n";
+static uint8_t manual_delay_msg[] = "Task manually forced to keep executing!!\n";
 static char here[30];
 
-static char buttonPressed = 1;
 
 static char timerFlag = 0;
 static volatile uint8_t stopFlag = 0;
@@ -24,8 +22,6 @@ static PriorityQueue readyQueue, delayedQueue;
 void Init(void);
 void SysTick_Handler(void);
 void USART2_IRQHandler(void);
-void TIM2_IRQHandler(void);
-void EXTI0_IRQHandler(void);
 void Dispatch(void);
 static void sendUART(uint8_t * data, uint32_t length);
 static uint8_t receiveUART(void);
@@ -45,9 +41,12 @@ void delayMs(int);
 
 void delayMs(int n)
 {
+	//This delayMs function is adjusted to match the PerformanceInMips value set in the Renode config file
+	//It is used to simulate cycles spent executing instructions by a "task"
+	
 	volatile int i,j;
 	for (i = 0; i < n; i++)
-		for (j = 0; j < 31250; j++)
+		for (j = 0; j < 44167; j++)
 				{}
 }
 
@@ -56,6 +55,13 @@ void queueTask(void(*task)(void), int prio)
 	addTask(&readyQueue, task, prio);
 }
 
+void USART2_IRQHandler(void) {
+	/* pause/resume UART messages */
+	stopFlag = !stopFlag;
+	
+	/* dummy read */
+	(void)receiveUART();
+}
 
 void queueDelayedTask(QueueItem* qI)
 {
@@ -67,24 +73,6 @@ void SysTick_Handler(void)
 {
 	timerFlag = 1;
 	ticks++;
-	
-	
-	//sendUART(wait_msg,sizeof(wait_msg));
-	//tempcounter++;
-	//sprintf(here, "%d\n",tempcounter);
-	//sendUART((uint8_t*)here,sizeof(here));
-//	if (tempcounter%10==0)
-//	{
-//		sprintf(here, "%d\n",tempcounter);
-//		sendUART((uint8_t*)here,sizeof(here));
-//	}
-		//sendUART(wait_msg,sizeof(wait_msg));
-		
-	/* Incrementing ticks every 100ms */
-	
-	//sprintf(here,"Ticks: %d\n",ticks);
-	//sendUART((uint8_t*)here,sizeof(here));
-	
 }
 
 
@@ -100,6 +88,7 @@ void Dispatch(void)
 		dequeueTask(&readyQueue)();
 		timerFlag = 0;
 	}
+	manageDelayedTasks(); /* Handle tasks in DelayQueue */
 }
 
 
@@ -118,8 +107,11 @@ void rerunMe(void(*task)(void), int delay, int prio)
 void manageDelayedTasks()
 {
 	tick_copy = ticks;
+	
+	//debugging 
 	sprintf(here, "%d\n",tick_copy);
 	sendUART((uint8_t*)here,sizeof(here));
+	
 	ticks = 0;
 	tick(&delayedQueue, &readyQueue, tick_copy);
 	if(rerunFlag == 1)
@@ -140,8 +132,8 @@ void task2()
 {
 	uint8_t t2msg[] = "Task 2 executing...\n";
 	sendUART(t2msg, sizeof(t2msg));
+	delayMs(400);
 	rerunMe(task2, 2, t2_prio);
-	delayMs(800); 
 }
 
 void task3()
@@ -149,40 +141,8 @@ void task3()
 	uint8_t t3msg[] = "Task 3 executing...\n";
 	sendUART(t3msg, sizeof(t3msg));
 	rerunMe(task3, 2, t3_prio);
-	//delayMs(100000);
 }
 
-
-
-void USART2_IRQHandler(void) {
-	/* pause/resume UART messages */
-	stopFlag = !stopFlag;
-	
-	/* dummy read */
-	(void)receiveUART();
-}
-
-void TIM2_IRQHandler(void)
-{
-	sendUART(wait_msg,sizeof(wait_msg));
-	
-}
-
-void EXTI0_IRQHandler(void) {
-		/* Clear interrupt request */
-		EXTI->PR |= 0x01;
-		/* send msg indicating button state */
-		if(buttonPressed)
-		{
-				sendUART(pressedMsg, sizeof(pressedMsg));
-				buttonPressed = 0;
-		}
-		else
-		{
-				sendUART(releasedMsg, sizeof(releasedMsg));
-				buttonPressed = 1;
-		}
-}
 
 static void sendUART(uint8_t * data, uint32_t length)
 {
@@ -252,10 +212,6 @@ static void uartInit()
     USART2->CR1 |= (1 << 13);
 }
 
-
-
-
-
 void Init(void)
 {
 		/* startup code initialization */
@@ -300,23 +256,26 @@ void Init(void)
 
 int main()
 {	
-<<<<<<< Updated upstream
-	  Init();
+	  Init(); /* Initialize structures, uart, gpio etc...*/
 		
 		queueTask(task1, t1_prio);
 		queueTask(task2, t2_prio);
 		queueTask(task3, t3_prio);
-	  
-		while(1)
-=======
-	  Init(); /* Initialize structures, uart, gpio etc...*/
+
 	  while(1)
->>>>>>> Stashed changes
 		{
 				if(timerFlag)
 				{
-					Dispatch(); /* Check ReadyQueue to execute tasks */
-					manageDelayedTasks(); /* Handle tasks in DelayQueue */
+					if(!stopFlag)
+						Dispatch(); /* Check ReadyQueue to execute tasks */
+					else 
+					{
+						//This is for testing purposes. Typing in the terminal causes the task to prolong its execution until 
+						//another typing event is captured.
+						
+						timerFlag=0;
+						sendUART(manual_delay_msg,sizeof(manual_delay_msg));
+					}
 				}
 		}
 }

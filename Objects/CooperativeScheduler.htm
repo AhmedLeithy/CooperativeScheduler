@@ -3,19 +3,11 @@
 <title>Static Call Graph - [.\Objects\CooperativeScheduler.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CooperativeScheduler.axf</H1><HR>
-<<<<<<< Updated upstream
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Fri Nov 13 00:18:04 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Sun Nov 15 17:44:24 2020
 <BR><P>
-<H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        144 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-=======
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Thu Nov 12 23:06:26 2020
-<BR><P>
-<H3>Maximum Stack Usage =        136 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
-Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
->>>>>>> Stashed changes
+__rt_entry_main &rArr; main &rArr; Dispatch &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 <P>
 <H3>
 Functions with no stack information
@@ -70,7 +62,7 @@ Function Pointers
  <LI><a href="#[7]">DebugMon_Handler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[47]">ETH_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[48]">ETH_WKUP_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
- <LI><a href="#[10]">EXTI0_IRQHandler</a> from main.o(.text.EXTI0_IRQHandler) referenced from startup_stm32f407xx.o(RESET)
+ <LI><a href="#[10]">EXTI0_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[32]">EXTI15_10_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[11]">EXTI1_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[12]">EXTI2_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
@@ -114,7 +106,7 @@ Function Pointers
  <LI><a href="#[25]">TIM1_CC_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[24]">TIM1_TRG_COM_TIM11_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[23]">TIM1_UP_TIM10_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
- <LI><a href="#[26]">TIM2_IRQHandler</a> from main.o(.text.TIM2_IRQHandler) referenced from startup_stm32f407xx.o(RESET)
+ <LI><a href="#[26]">TIM2_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[27]">TIM3_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[28]">TIM4_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
  <LI><a href="#[3c]">TIM5_IRQHandler</a> from startup_stm32f407xx.o(.text) referenced from startup_stm32f407xx.o(RESET)
@@ -135,11 +127,11 @@ Function Pointers
  <LI><a href="#[5c]">__main</a> from __main.o(!!!main) referenced from startup_stm32f407xx.o(.text)
  <LI><a href="#[5e]">_printf_input_char</a> from _printf_char_common.o(.text) referenced from _printf_char_common.o(.text)
  <LI><a href="#[5d]">_sputc</a> from _sputc.o(.text) referenced from noretval__2sprintf.o(.text)
- <LI><a href="#[5f]">task1</a> from main.o(.text.task1) referenced 2 times from main.o(.text.Init)
+ <LI><a href="#[5f]">task1</a> from main.o(.text.task1) referenced 2 times from main.o(.text.main)
  <LI><a href="#[5f]">task1</a> from main.o(.text.task1) referenced 2 times from main.o(.text.task1)
- <LI><a href="#[60]">task2</a> from main.o(.text.task2) referenced 2 times from main.o(.text.Init)
+ <LI><a href="#[60]">task2</a> from main.o(.text.task2) referenced 2 times from main.o(.text.main)
  <LI><a href="#[60]">task2</a> from main.o(.text.task2) referenced 2 times from main.o(.text.task2)
- <LI><a href="#[61]">task3</a> from main.o(.text.task3) referenced 2 times from main.o(.text.Init)
+ <LI><a href="#[61]">task3</a> from main.o(.text.task3) referenced 2 times from main.o(.text.main)
  <LI><a href="#[61]">task3</a> from main.o(.text.task3) referenced 2 times from main.o(.text.task3)
 </UL>
 <P>
@@ -279,8 +271,8 @@ Global Symbols
 <P><STRONG><a name="[c2]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[71]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; Dispatch &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -449,6 +441,9 @@ Global Symbols
 <P><STRONG><a name="[48]"></a>ETH_WKUP_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
+<P><STRONG><a name="[10]"></a>EXTI0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
+</UL>
 <P><STRONG><a name="[32]"></a>EXTI15_10_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
@@ -554,6 +549,9 @@ Global Symbols
 <P><STRONG><a name="[23]"></a>TIM1_UP_TIM10_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
+<P><STRONG><a name="[26]"></a>TIM2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
+</UL>
 <P><STRONG><a name="[27]"></a>TIM3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
@@ -611,7 +609,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItem
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPriorityQueue
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPriorityQueue
 </UL>
 
 <P><STRONG><a name="[7b]"></a>free</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, h1_free.o(.text))
@@ -630,7 +628,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
 </UL>
 
 <P><STRONG><a name="[7e]"></a>__printf</STRONG> (Thumb, 104 bytes, Stack size 24 bytes, __printf.o(.text))
@@ -806,34 +804,28 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__default_signal_display
 </UL>
 
-<P><STRONG><a name="[8b]"></a>Dispatch</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, main.o(.text.Dispatch))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Dispatch &rArr; dequeueTask &rArr; free
+<P><STRONG><a name="[8b]"></a>Dispatch</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, main.o(.text.Dispatch))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = Dispatch &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isEmpty
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isEmpty
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dequeueTask
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[10]"></a>EXTI0_IRQHandler</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, main.o(.text.EXTI0_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = EXTI0_IRQHandler
+<P><STRONG><a name="[90]"></a>Init</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, main.o(.text.Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = Init &rArr; newPriorityQueue &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
-</UL>
-<P><STRONG><a name="[8f]"></a>Init</STRONG> (Thumb, 168 bytes, Stack size 16 bytes, main.o(.text.Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = Init &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-</UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPriorityQueue
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPriorityQueue
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartInit
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpioInit
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartInit
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpioInit
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -841,21 +833,14 @@ Global Symbols
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(.text.SysTick_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[90]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, system_stm32f4xx.o(.text.SystemCoreClockUpdate))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<P><STRONG><a name="[91]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, system_stm32f4xx.o(.text.SystemCoreClockUpdate))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
 <P><STRONG><a name="[5b]"></a>SystemInit</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, system_stm32f4xx.o(.text.SystemInit))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
-</UL>
-<P><STRONG><a name="[26]"></a>TIM2_IRQHandler</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, main.o(.text.TIM2_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM2_IRQHandler
-</UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[30]"></a>USART2_IRQHandler</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, main.o(.text.USART2_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = USART2_IRQHandler
@@ -870,7 +855,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItem
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;innerAddTask
 </UL>
-<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
 </UL>
 
 <P><STRONG><a name="[a1]"></a>delayMs</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, main.o(.text.delayMs))
@@ -900,18 +885,19 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatch
 </UL>
 
-<P><STRONG><a name="[72]"></a>main</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
-<LI>Call Chain = main &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
+<P><STRONG><a name="[72]"></a>main</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = main &rArr; Dispatch &rArr; manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatch
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>manageDelayedTasks</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, main.o(.text.manageDelayedTasks))
+<P><STRONG><a name="[8f]"></a>manageDelayedTasks</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, main.o(.text.manageDelayedTasks))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = manageDelayedTasks &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -920,15 +906,15 @@ Global Symbols
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueDelayedTask
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
-<BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatch
 </UL>
 
-<P><STRONG><a name="[95]"></a>newPriorityQueue</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, priorityqueue.o(.text.newPriorityQueue))
+<P><STRONG><a name="[96]"></a>newPriorityQueue</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, priorityqueue.o(.text.newPriorityQueue))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = newPriorityQueue &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
 <P><STRONG><a name="[9a]"></a>newQueueItem</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, priorityqueue.o(.text.newQueueItem))
@@ -953,76 +939,56 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;innerAddTask
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
 </UL>
 
-<P><STRONG><a name="[96]"></a>queueTask</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(.text.queueTask))
+<P><STRONG><a name="[9c]"></a>queueTask</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(.text.queueTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;addTask
 </UL>
-<<<<<<< Updated upstream
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[97]"></a>rerunMe</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main.o(.text.rerunMe))
+<P><STRONG><a name="[a0]"></a>rerunMe</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, main.o(.text.rerunMe))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
-=======
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
-</UL>
-
-<P><STRONG><a name="[a0]"></a>rerunMe</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, main.o(.text.rerunMe))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-</UL>
-<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
->>>>>>> Stashed changes
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newQueueItemDelayed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 </UL>
 
-<<<<<<< Updated upstream
-<P><STRONG><a name="[5d]"></a>task1</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-=======
 <P><STRONG><a name="[5f]"></a>task1</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = task1 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
->>>>>>> Stashed changes
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Address Reference Count : 2]<UL><LI> main.o(.text.task1)
-<LI> main.o(.text.Init)
+<LI> main.o(.text.main)
 </UL>
 <P><STRONG><a name="[60]"></a>task2</STRONG> (Thumb, 66 bytes, Stack size 32 bytes, main.o(.text.task2))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = task2 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task2 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delayMs
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Address Reference Count : 2]<UL><LI> main.o(.text.task2)
-<LI> main.o(.text.Init)
+<LI> main.o(.text.main)
 </UL>
-<<<<<<< Updated upstream
-<P><STRONG><a name="[5f]"></a>task3</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task3))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task3 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
-=======
 <P><STRONG><a name="[61]"></a>task3</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, main.o(.text.task3))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = task3 &rArr; rerunMe &rArr; newQueueItemDelayed &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
->>>>>>> Stashed changes
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task3 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Address Reference Count : 2]<UL><LI> main.o(.text.task3)
-<LI> main.o(.text.Init)
+<LI> main.o(.text.main)
 </UL>
 <P><STRONG><a name="[9d]"></a>tick</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, priorityqueue.o(.text.tick))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = tick &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
@@ -1031,7 +997,7 @@ Global Symbols
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;innerAddTask
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dequeueTask
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
 </UL>
 
 <P><STRONG><a name="[6a]"></a>_fp_init</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
@@ -1045,24 +1011,24 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[93]"></a>SysTick_Config</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, main.o(.text.SysTick_Config))
+<P><STRONG><a name="[94]"></a>SysTick_Config</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, main.o(.text.SysTick_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SysTick_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
-<P><STRONG><a name="[94]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(.text.__NVIC_EnableIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<P><STRONG><a name="[95]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(.text.__NVIC_EnableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
 <P><STRONG><a name="[97]"></a>__NVIC_SetPriority</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, main.o(.text.__NVIC_SetPriority))
-<BR><BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
 </UL>
 
-<P><STRONG><a name="[91]"></a>gpioInit</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, main.o(.text.gpioInit))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<P><STRONG><a name="[92]"></a>gpioInit</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, main.o(.text.gpioInit))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
 <P><STRONG><a name="[98]"></a>receiveUART</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, main.o(.text.receiveUART))
@@ -1073,14 +1039,13 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
-<LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
-<LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI0_IRQHandler
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatch
 </UL>
 
-<P><STRONG><a name="[92]"></a>uartInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, main.o(.text.uartInit))
-<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
+<P><STRONG><a name="[93]"></a>uartInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, main.o(.text.uartInit))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init
 </UL>
 
 <P><STRONG><a name="[5e]"></a>_printf_input_char</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, _printf_char_common.o(.text))
