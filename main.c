@@ -3,10 +3,10 @@
 #include "stdio.h"
 #include "PriorityQueue.h"
 
-static uint8_t msg[] = "Renrunning !!\n";
 static uint8_t wait_msg[] = "Ready queue is empty !!\n";
 static uint8_t pressedMsg[] = "Button is pressed !!\n";
 static uint8_t releasedMsg[] = "Button is released !!\n";
+static char here[30];
 
 static char buttonPressed = 1;
 
@@ -41,6 +41,15 @@ void queueTask(void(*task)(void), int prio);
 void queueDelayedTask(QueueItem* qI);
 void rerunMe(void(*task)(void), int delay, int prio);
 void manageDelayedTasks(void);
+void delayMs(int);
+
+void delayMs(int n)
+{
+	volatile int i,j;
+	for (i = 0; i < n; i++)
+		for (j = 0; j < 31250; j++)
+				{}
+}
 
 void queueTask(void(*task)(void), int prio)
 {
@@ -109,6 +118,8 @@ void rerunMe(void(*task)(void), int delay, int prio)
 void manageDelayedTasks()
 {
 	tick_copy = ticks;
+	sprintf(here, "%d\n",tick_copy);
+	sendUART((uint8_t*)here,sizeof(here));
 	ticks = 0;
 	tick(&delayedQueue, &readyQueue, tick_copy);
 	if(rerunFlag == 1)
@@ -122,20 +133,23 @@ void task1()
 {
 	uint8_t t1msg[] = "Task 1 executing...\n";
 	sendUART(t1msg, sizeof(t1msg));
-	rerunMe(task1, 5, t1_prio);
+	rerunMe(task1, 4, t1_prio);
 }
 
 void task2()
 {
 	uint8_t t2msg[] = "Task 2 executing...\n";
 	sendUART(t2msg, sizeof(t2msg));
+	rerunMe(task2, 2, t2_prio);
+	delayMs(800); 
 }
 
 void task3()
 {
 	uint8_t t3msg[] = "Task 3 executing...\n";
 	sendUART(t3msg, sizeof(t3msg));
-	rerunMe(task3, 4, t3_prio);
+	rerunMe(task3, 2, t3_prio);
+	//delayMs(100000);
 }
 
 
@@ -284,12 +298,9 @@ void Init(void)
 
 }
 
-
-
-
-
 int main()
 {	
+<<<<<<< Updated upstream
 	  Init();
 		
 		queueTask(task1, t1_prio);
@@ -297,14 +308,15 @@ int main()
 		queueTask(task3, t3_prio);
 	  
 		while(1)
+=======
+	  Init(); /* Initialize structures, uart, gpio etc...*/
+	  while(1)
+>>>>>>> Stashed changes
 		{
-				
 				if(timerFlag)
 				{
-					Dispatch();
-					
-					manageDelayedTasks();
-
+					Dispatch(); /* Check ReadyQueue to execute tasks */
+					manageDelayedTasks(); /* Handle tasks in DelayQueue */
 				}
 		}
 }
