@@ -27,15 +27,15 @@ static void sendUART(uint8_t * data, uint32_t length);
 static uint8_t receiveUART(void);
 
 void task1(void);
-static const int t1_prio = 1;
+static const unsigned int t1_prio = 1;
 void task2(void);
-static const int t2_prio = 2;
+static const unsigned int t2_prio = 2;
 void task3(void);
-static const int t3_prio = 3;
+static const unsigned int t3_prio = 3;
 
-void queueTask(void(*task)(void), int prio);
+void queueTask(void(*task)(void), unsigned int prio);
 void queueDelayedTask(QueueItem* qI);
-void rerunMe(void(*task)(void), int delay, int prio);
+void rerunMe(void(*task)(void), unsigned int delay, unsigned int prio);
 void manageDelayedTasks(void);
 void delayMs(int);
 
@@ -50,7 +50,7 @@ void delayMs(int n)
 				{}
 }
 
-void queueTask(void(*task)(void), int prio)
+void queueTask(void(*task)(void), unsigned int prio)
 {
 	addTask(&readyQueue, task, prio);
 }
@@ -93,7 +93,7 @@ void Dispatch(void)
 
 
 
-void rerunMe(void(*task)(void), int delay, int prio)
+void rerunMe(void(*task)(void), unsigned int delay, unsigned int prio)
 {
 	if(prio >0){
 		rerunItem = newQueueItemDelayed(task,delay,prio);	
@@ -109,8 +109,8 @@ void manageDelayedTasks()
 	tick_copy = ticks;
 	
 	//debugging 
-	sprintf(here, "%d\n",tick_copy);
-	sendUART((uint8_t*)here,sizeof(here));
+	//sprintf(here, "%d\n",tick_copy);
+	//sendUART((uint8_t*)here,sizeof(here));
 	
 	ticks = 0;
 	tick(&delayedQueue, &readyQueue, tick_copy);
