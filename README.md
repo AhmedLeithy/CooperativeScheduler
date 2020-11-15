@@ -51,7 +51,7 @@ For the first test, where each task is readded to the ready queue after 10 ticks
 ### Demo 1:
 For the first demo test, we have the following task configuration:
 
-|   Priority    | Delay (delay queue) |
+||   Priority    | Delay (delay queue) |
 | :---: | :---: | :---: |
 | `Task 1`  | 1| 4|
 | `Task 2`  | 2| 2|
@@ -68,7 +68,7 @@ This output is the same as the program output, which can be seen below:<br/>
 ### Demo 2:
 For the second demo test, we have the following task configuration:
 
-|   Priority    | Delay (delay queue) | Execution Time |
+||  Priority    | Delay (delay queue) | Execution Time (ms) |
 | :---: | :---: | :---: | :---: |
 | `Task 1`  | 1| 4| 100 |
 | `Task 2`  | 2| 2| 400 |
@@ -80,7 +80,6 @@ If we trace this for the first couple of cycles, we will get the following:
 This output is the same as the program output, which can be seen below. It should be noted that each task execution message is followed by an integer value inidcating 
 the number of ticks that have passed since the task's execution started.<br/>
 ![](images/Demo2_numbers.png)
-![](images/Demo2_withoutNumbers.png)
 
 ***
 
