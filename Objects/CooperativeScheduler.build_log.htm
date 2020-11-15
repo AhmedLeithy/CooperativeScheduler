@@ -27,24 +27,14 @@ Project File Date:  11/11/2020
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'D:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-compiling PriorityQueue.c...
-main.c(55): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
-        addTask(&readyQueue, task, prio);
-        ~~~~~~~                    ^~~~
-main.c(99): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
-                rerunItem = newQueueItemDelayed(task,delay,prio);       
-                            ~~~~~~~~~~~~~~~~~~~      ^~~~~
-main.c(99): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
-                rerunItem = newQueueItemDelayed(task,delay,prio);       
-                            ~~~~~~~~~~~~~~~~~~~            ^~~~
-main.c(116): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
-        tick(&delayedQueue, &readyQueue, tick_copy);
-        ~~~~                             ^~~~~~~~~
-4 warnings generated.
+main.c(9): warning: unused variable 'debug_msg' [-Wunused-variable]
+static char debug_msg[30];
+            ^
+1 warning generated.
 compiling main.c...
 linking...
-Program Size: Code=2956 RO-data=512 RW-data=72 ZI-data=1704  
-".\Objects\CooperativeScheduler.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=2408 RO-data=512 RW-data=72 ZI-data=1672  
+".\Objects\CooperativeScheduler.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -75,7 +65,7 @@ Package Vendor: Keil
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s
       Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

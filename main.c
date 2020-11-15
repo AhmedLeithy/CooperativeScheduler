@@ -5,7 +5,8 @@
 
 static uint8_t wait_msg[] = "Ready queue is empty !!\n";
 static uint8_t manual_delay_msg[] = "Task manually forced to keep executing!!\n";
-static char here[30];
+
+static char debug_msg[30];
 
 
 static char timerFlag = 0;
@@ -27,15 +28,15 @@ static void sendUART(uint8_t * data, uint32_t length);
 static uint8_t receiveUART(void);
 
 void task1(void);
-static const unsigned int t1_prio = 1;
+static const int t1_prio = 1;
 void task2(void);
-static const unsigned int t2_prio = 2;
+static const int t2_prio = 2;
 void task3(void);
-static const unsigned int t3_prio = 3;
+static const int t3_prio = 3;
 
-void queueTask(void(*task)(void), unsigned int prio);
+void queueTask(void(*task)(void), int prio);
 void queueDelayedTask(QueueItem* qI);
-void rerunMe(void(*task)(void), unsigned int delay, unsigned int prio);
+void rerunMe(void(*task)(void), int delay, int prio);
 void manageDelayedTasks(void);
 void delayMs(int);
 
@@ -50,9 +51,9 @@ void delayMs(int n)
 				{}
 }
 
-void queueTask(void(*task)(void), unsigned int prio)
+void queueTask(void(*task)(void), int prio)
 {
-	addTask(&readyQueue, task, prio);
+	addTask(&readyQueue, task, prio >= 0? prio:0);
 }
 
 void USART2_IRQHandler(void) {
@@ -93,13 +94,13 @@ void Dispatch(void)
 
 
 
-void rerunMe(void(*task)(void), unsigned int delay, unsigned int prio)
+void rerunMe(void(*task)(void), int delay, int prio)
 {
 	if(prio >0){
-		rerunItem = newQueueItemDelayed(task,delay,prio);	
+		rerunItem = newQueueItemDelayed(task,delay,prio >= 0? prio:0);	
 		rerunFlag = 1;
 	} else {
-		queueTask(task, prio);
+		queueTask(task, prio >= 0? prio:0);
 	}
 }
 
@@ -109,8 +110,8 @@ void manageDelayedTasks()
 	tick_copy = ticks;
 	
 	//debugging 
-	//sprintf(here, "%d\n",tick_copy);
-	//sendUART((uint8_t*)here,sizeof(here));
+//	sprintf(debug_msg, "%d\n",tick_copy);
+//	sendUART((uint8_t*)debug_msg,sizeof(debug_msg));
 	
 	ticks = 0;
 	tick(&delayedQueue, &readyQueue, tick_copy);

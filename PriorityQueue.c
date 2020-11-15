@@ -21,7 +21,7 @@
 //Queue Item Function Implementations
 
 //Constructor
-QueueItem* newQueueItem(void (*task)(void), unsigned int priority){
+QueueItem* newQueueItem(void (*task)(void), int priority){
 	QueueItem *q = (QueueItem*)malloc(sizeof(QueueItem));
 	q->priority =priority;
 	q->task = task;
@@ -30,7 +30,7 @@ QueueItem* newQueueItem(void (*task)(void), unsigned int priority){
 	return q;
 }
 
-QueueItem* newQueueItemDelayed(void (*task)(void), unsigned int priority, unsigned int delayedPriority){
+QueueItem* newQueueItemDelayed(void (*task)(void), int priority, int delayedPriority){
 	QueueItem *q = (QueueItem*)malloc(sizeof(QueueItem));
 	q->priority =priority;
 	q->task = task;
@@ -54,14 +54,14 @@ PriorityQueue newPriorityQueue(void){
 	pq->head = 0;
 	return *pq;
 }
-void addDelayedTask(PriorityQueue* queue, void(*task)(void), unsigned int delay, unsigned int delayedPriority){
+void addDelayedTask(PriorityQueue* queue, void(*task)(void), int delay, int delayedPriority){
 	queue->size++;
 	QueueItem * newItem = newQueueItemDelayed(task,delay,delayedPriority);
 	innerAddTask(queue,newItem);
 }
 
 
-void addTask(PriorityQueue* queue, void(*task)(void), unsigned int priority){
+void addTask(PriorityQueue* queue, void(*task)(void), int priority){
 	//add to queue
 	//low value of priority is at the beginning of the queue
 	queue->size ++;
@@ -119,7 +119,7 @@ void runQueue(PriorityQueue* q){
 	}
 }
 
-void tick(PriorityQueue* delayedQueue, PriorityQueue* readyQueue, unsigned int ticks){
+void tick(PriorityQueue* delayedQueue, PriorityQueue* readyQueue, int ticks){
 	QueueItem *temp = delayedQueue->head;
 	while(temp!=0){
 		temp->priority -= ticks;
