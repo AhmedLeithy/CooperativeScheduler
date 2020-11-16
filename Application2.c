@@ -90,8 +90,10 @@ void Dispatch(void)
 {
 	if (isEmpty(&readyQueue))
 	{
-		sendUART(wait_msg,sizeof(wait_msg));
-		timerFlag = 0;
+		if(timerFlag){
+			sendUART(wait_msg,sizeof(wait_msg));
+			timerFlag = 0;
+		}
 	}
 	else
 	{
@@ -140,6 +142,9 @@ void uartReader()
 		operand++;
 	else if (input == 'd')
 		operand--;
+
+	delayMs(20); // simulating operation
+
 	
 	queueTask(Doubler, doublerPrio);
 	queueTask(Squarer,squarerPrio);
@@ -153,6 +158,8 @@ void Doubler()
 	char numString[16] ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int sum = operand*2;
 	
+	delayMs(80); // simulating operation
+	
 	sprintf(numString, " %d\n",sum);
 	sendUART((uint8_t*)numString,sizeof(numString));
 }
@@ -164,6 +171,9 @@ void Squarer()
 	
 	char numString[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int square = operand*operand;
+	
+	delayMs(80); // simulating operation
+
 	
 	sprintf(numString, " %d\n",square);
 	sendUART((uint8_t*)numString,sizeof(numString));
@@ -286,9 +296,6 @@ int main()
 		
 	  while(1)
 		{
-				if(timerFlag)
-				{
-						Dispatch(); /* Check ReadyQueue to execute tasks */
-				}
+			Dispatch(); /* Check ReadyQueue to execute tasks */
 		}
 }

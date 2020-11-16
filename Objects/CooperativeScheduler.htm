@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\CooperativeScheduler.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\CooperativeScheduler.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Mon Nov 16 03:07:16 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140002: Last Updated: Mon Nov 16 17:27:50 2020
 <BR><P>
 <H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -742,7 +742,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__default_signal_display
 </UL>
 
-<P><STRONG><a name="[82]"></a>Dispatch</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, application1.o(.text.Dispatch))
+<P><STRONG><a name="[82]"></a>Dispatch</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, application1.o(.text.Dispatch))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = Dispatch &rArr; manageDelayedTasks &rArr; tick &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;manageDelayedTasks
@@ -798,7 +798,9 @@ Global Symbols
 <P><STRONG><a name="[98]"></a>delayMs</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, application1.o(.text.delayMs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delayMs
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 </UL>
 
 <P><STRONG><a name="[85]"></a>dequeueTask</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, priorityqueue.o(.text.dequeueTask))
@@ -822,7 +824,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dispatch
 </UL>
 
-<P><STRONG><a name="[6e]"></a>main</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, application1.o(.text.main))
+<P><STRONG><a name="[6e]"></a>main</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, application1.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = main &rArr; Dispatch &rArr; manageDelayedTasks &rArr; tick &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;queueTask
@@ -895,10 +897,11 @@ Global Symbols
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 </UL>
 
-<P><STRONG><a name="[5d]"></a>task1</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, application1.o(.text.task1))
+<P><STRONG><a name="[5d]"></a>task1</STRONG> (Thumb, 64 bytes, Stack size 32 bytes, application1.o(.text.task1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task1 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delayMs
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Address Reference Count : 2]<UL><LI> application1.o(.text.task1)
@@ -914,10 +917,11 @@ Global Symbols
 <BR>[Address Reference Count : 2]<UL><LI> application1.o(.text.task2)
 <LI> application1.o(.text.main)
 </UL>
-<P><STRONG><a name="[5f]"></a>task3</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, application1.o(.text.task3))
+<P><STRONG><a name="[5f]"></a>task3</STRONG> (Thumb, 64 bytes, Stack size 32 bytes, application1.o(.text.task3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = task3 &rArr; rerunMe &rArr; queueTask &rArr; addTask &rArr; newQueueItem &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rerunMe
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delayMs
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendUART
 </UL>
 <BR>[Address Reference Count : 2]<UL><LI> application1.o(.text.task3)

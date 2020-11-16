@@ -213,8 +213,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Application2.c</PathWithFileName>
-      <FilenameWithoutPath>Application2.c</FilenameWithoutPath>
+      <PathWithFileName>.\Application1.c</PathWithFileName>
+      <FilenameWithoutPath>Application1.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -6,7 +6,7 @@
 static uint8_t wait_msg[] = "Ready queue is empty !!\n";
 static uint8_t manual_delay_msg[] = "Task manually forced to keep executing!!\n";
 
-static char debug_msg[30];
+//static char debug_msg[30];
 
 
 static char timerFlag = 0;
@@ -47,7 +47,7 @@ void delayMs(int n)
 	
 	volatile int i,j;
 	for (i = 0; i < n; i++)
-		for (j = 0; j < 44167; j++)
+		for (j = 0; j < 44200; j++)
 				{}
 }
 
@@ -81,8 +81,10 @@ void Dispatch(void)
 {
 	if (isEmpty(&readyQueue))
 	{
-		sendUART(wait_msg,sizeof(wait_msg));
-		timerFlag = 0;
+		if(timerFlag){
+			sendUART(wait_msg,sizeof(wait_msg));
+			timerFlag = 0;
+		}
 	}
 	else
 	{
@@ -126,6 +128,9 @@ void task1()
 {
 	uint8_t t1msg[] = "Task 1 executing...\n";
 	sendUART(t1msg, sizeof(t1msg));
+	
+	delayMs(100);//simulating operation
+
 	rerunMe(task1, 4, t1_prio);
 }
 
@@ -133,7 +138,9 @@ void task2()
 {
 	uint8_t t2msg[] = "Task 2 executing...\n";
 	sendUART(t2msg, sizeof(t2msg));
-	delayMs(400);
+	
+	delayMs(500);//simulating extended operation
+	
 	rerunMe(task2, 2, t2_prio);
 }
 
@@ -141,6 +148,9 @@ void task3()
 {
 	uint8_t t3msg[] = "Task 3 executing...\n";
 	sendUART(t3msg, sizeof(t3msg));
+	
+	delayMs(100); //simulating operation
+	
 	rerunMe(task3, 2, t3_prio);
 }
 
@@ -265,18 +275,15 @@ int main()
 
 	  while(1)
 		{
-				if(timerFlag)
+				if(!stopFlag)
+					Dispatch(); /* Check ReadyQueue to execute tasks */
+				else 
 				{
-					if(!stopFlag)
-						Dispatch(); /* Check ReadyQueue to execute tasks */
-					else 
-					{
-						//This is for testing purposes. Typing in the terminal causes the task to prolong its execution until 
-						//another typing event is captured.
+					//This is for testing purposes. Typing in the terminal causes the task to prolong its execution until 
+					//another typing event is captured.
 						
-						timerFlag=0;
-						sendUART(manual_delay_msg,sizeof(manual_delay_msg));
-					}
+					timerFlag=0;
+					sendUART(manual_delay_msg,sizeof(manual_delay_msg));
 				}
 		}
 }
