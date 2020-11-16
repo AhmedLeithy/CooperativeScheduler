@@ -95,15 +95,15 @@ When uartReader executes, it reads its corresponding command from the commandLis
 
 Through this process, the user can input any sequence of 'u' and 'd' characters, and all the input (up to a sequence of size 30) would be executed in the correct order. The following screenshots illustrate the process:
 
-###command: 'uuuuu'
+### command: 'uuuuu' <br/>
 ![](images/FirstImage.png)
 
 
-###command: 'd..d..dd..d..d'
+### command: 'd..d..dd..d..d'<br/>
 ![](images/SecondImage.png)
 
 
-###command: '.uuuuuudddd'
+### command: '.uuuuuudddd'<br/>
 ![](images/ThirdImage.png)
 
 
