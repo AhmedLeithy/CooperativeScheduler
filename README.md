@@ -83,6 +83,28 @@ the number of ticks that have passed since the task's execution started.<br/>
 
 ## Application 2
 
+This application is more involved than the previous demos. There are 3 tasks in play here: 
+1. uartReader
+2. Doubler
+3. Squarer
+As well as the UART IRQ handler. 
+
+When the handler recieves an interrupt, it reads the character from the UART buffer using the receiveUART() function. It then proceeds to place the character, which represents a command, into the commandList array, which acts as a makeshift application queue. The IRQ handler proceeds to add the task uartReader into the task queue with a priority of 8, which is quite low. 
+
+When uartReader executes, it reads its corresponding command from the commandList array (effectively dequeuing), which is then processed. A command can either take the value 'u' or 'd' for up or down, which increment or decrement the operand value respectively. After parsing and processing the command, uartReader() enqueues the Doubler and Squarer tasks into the ready queue, which have higher priority to ensure that they execute before the next uartReader instance is called as it would edit the operand value.
+
+Through this process, the user can input any sequence of 'u' and 'd' characters, and all the input (up to a sequence of size 30) would be executed in the correct order. The following screenshots illustrate the process:
+
+###command: 'uuuuu'
+![](images/FirstImage.png)
+
+
+###command: 'd..d..dd..d..d'
+![](images/SecondImage.png)
+
+
+###command: '.uuuuuudddd'
+![](images/ThirdImage.png)
 
 
 ***
