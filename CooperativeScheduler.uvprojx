@@ -384,11 +384,6 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
               <FileName>PriorityQueue.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\PriorityQueue.h</FilePath>
@@ -397,6 +392,11 @@
               <FileName>PriorityQueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\PriorityQueue.c</FilePath>
+            </File>
+            <File>
+              <FileName>Application1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Application1.c</FilePath>
             </File>
           </Files>
         </Group>
