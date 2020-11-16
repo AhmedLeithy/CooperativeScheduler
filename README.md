@@ -64,6 +64,23 @@ This output is the same as the program output, which can be seen below:<br/>
 ![](images/demo1-2.png)
 ![](images/demo1-3.png)
 
+
+### Demo 2:
+For the second demo test, we have the following task configuration:
+
+||  Priority    | Delay (delay queue) | Execution Time (ms) |
+| :---: | :---: | :---: | :---: |
+| `Task 1`  | 1| 4| 100 |
+| `Task 2`  | 2| 2| 400 |
+| `Task 3`  | 3| 2| 100 |
+
+If we trace this for the first couple of cycles, we will get the following:
+![](images/Demo2_image.png)
+
+This output is the same as the program output, which can be seen below. It should be noted that each task execution message is followed by an integer value indicating 
+the number of ticks that have passed since the task's execution started.<br/>
+![](images/Demo2_number.png)
+
 ***
 
 ## Running and Building the Code
