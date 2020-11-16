@@ -394,9 +394,9 @@
               <FilePath>.\PriorityQueue.c</FilePath>
             </File>
             <File>
-              <FileName>Application1.c</FileName>
+              <FileName>Application2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Application1.c</FilePath>
+              <FilePath>.\Application2.c</FilePath>
             </File>
           </Files>
         </Group>
